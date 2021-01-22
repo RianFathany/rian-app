@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/rian-app/static/css/main.c2fe0685.chunk.css",
+    "main.js": "/rian-app/static/js/main.ec9272e8.chunk.js",
+    "main.js.map": "/rian-app/static/js/main.ec9272e8.chunk.js.map",
+    "runtime-main.js": "/rian-app/static/js/runtime-main.4fd9a072.js",
+    "runtime-main.js.map": "/rian-app/static/js/runtime-main.4fd9a072.js.map",
+    "static/js/2.e58a9056.chunk.js": "/rian-app/static/js/2.e58a9056.chunk.js",
+    "static/js/2.e58a9056.chunk.js.map": "/rian-app/static/js/2.e58a9056.chunk.js.map",
+    "index.html": "/rian-app/index.html",
+    "static/css/main.c2fe0685.chunk.css.map": "/rian-app/static/css/main.c2fe0685.chunk.css.map",
+    "static/js/2.e58a9056.chunk.js.LICENSE.txt": "/rian-app/static/js/2.e58a9056.chunk.js.LICENSE.txt",
+    "static/media/fontStyle.css": "/rian-app/static/media/adventpro-semibold-webfont.f27e122e.woff",
+    "static/media/font-awesome.css": "/rian-app/static/media/fontawesome-webfont.f691f37e.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4fd9a072.js",
+    "static/js/2.e58a9056.chunk.js",
+    "static/css/main.c2fe0685.chunk.css",
+    "static/js/main.ec9272e8.chunk.js"
+  ]
+}
