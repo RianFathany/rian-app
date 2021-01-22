@@ -1,6 +1,6 @@
 {
-  "homepage": "http://rianfathany.github.io/rianapp",
-  "name": "rianapp",
+  "homepage": "http://rianfathany.github.io/rian-app",
+  "name": "rian-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
