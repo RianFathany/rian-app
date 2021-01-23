@@ -270,6 +270,7 @@ input{
     bottom: 50px;
 }
 .btn-release button{
+  z-index: 10;
   background-image: url("img/poke-pokeball-release.png");
   background-color: white;
   background-repeat: no-repeat;
