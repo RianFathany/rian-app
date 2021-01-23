@@ -443,6 +443,7 @@ input{
   margin: 0 25%;
 }
 .btn-gotcha{
+  background: white;
   top: 200px;
   width: 175px;
   padding: 14px;
