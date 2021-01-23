@@ -174,7 +174,7 @@ class PokemonDetails extends Component {
       this.createLocalData(JSON.stringify(localdata));
       console.log(rand + ' GATCHA');
     }else{
-      this.setState({isDetail: 2,isGatcha:2});
+      this.setState({isDetail: 2,isGatcha:null});
       var localdata = {
         nickname:this.state.items.name,
         name:this.state.items.name,
@@ -193,39 +193,39 @@ class PokemonDetails extends Component {
 
   handleSubmit(event){
 
-    if(this.state.isEditable == 2){
-      if(this.state.value in localStorage){
-         alert('Nickname Exist')
-      } else {
-
-        localStorage.removeItem(this.state.getLocalData.nickname);
-
-        var localdata = {
-          nickname:this.state.value,
-          name:this.state.getLocalData.name,
-          isMyList:null,
-          myListId:this.state.getLocalData.myListId,
-        }
-        this.createLocalData(JSON.stringify(localdata));
-
-        alert('Nickname '+ this.state.value +' Updated');
-        event.preventDefault();
-
-        if(this.state.getLocalData.isMyList == 1){
-          var req = {
-            isMyList:1,
-            id:this.state.getLocalData.myListId,
-            nickname:this.state.value
-          }
-          this.storeData(JSON.stringify(req));
-          this.createNicknameCache(this.state.value);
-        }
-
-        this.setState({isEditable:null});
+    if(this.state.value in localStorage){
+      if(this.state.isEditable == 1){
+          alert('This nickname exist')
+         console.log('This nickname exist')
       }
+
+    } else {
+
+      localStorage.removeItem(this.state.getLocalData.nickname);
+
+      var localdata = {
+        nickname:this.state.value,
+        name:this.state.getLocalData.name,
+        isMyList:null,
+        myListId:this.state.getLocalData.myListId,
+      }
+      this.createLocalData(JSON.stringify(localdata));
+
+      alert('Nickname '+ this.state.value +' Updated');
+      event.preventDefault();
+
+      if(this.state.getLocalData.isMyList == 1){
+        var req = {
+          isMyList:1,
+          id:this.state.getLocalData.myListId,
+          nickname:this.state.value
+        }
+        this.storeData(JSON.stringify(req));
+        this.createNicknameCache(this.state.value);
+      }
+
+      this.setState({isEditable:null});
     }
-
-
   }
 
   addToMyList = () => {
@@ -307,11 +307,12 @@ class PokemonDetails extends Component {
   }
 
   editable = () => {
+    this.setState({isGatcha:1});
     if(this.state.isEditable == null){
       this.setState({isEditable:1});
     }
     if(this.state.isEditable == 1){
-      this.setState({isEditable:2});
+      this.setState({isEditable:null});
     }
 
   }
@@ -319,70 +320,82 @@ class PokemonDetails extends Component {
   render(){
     const { error, isLoaded, items, isDetail, isGatcha, isEditable, getLocalData} = this.state;
 
+    var btnCatch;
+    var btnLetItGo;
+    var btnAddToMyList;
+    var btnRelease;
+    var input;
     var info;
-    if(isDetail == null){
-      info = "Detail Pokemon";
-      var btnCatch = <button  onClick={ () => this.catchPokemon()}><div className="title-catch">Catch</div></button>;
-    }
 
-    if(isGatcha == 1){
-      info = "Pokemon Catched";
-      var btnAddToMyList = <button  onClick={ () => this.addToMyList()}>Add To My List</button>;
-      var btnLetItGo = <NavLink
-                          to={{
-                            pathname: "/",
-                          }}>
-                          <div>
-                            <button  onClick={ () => this.backData(1)}>Let It Go</button>
-                          </div>
-                       </NavLink>;
+    if(isGatcha == null){
+        //btnCatch = <button  onClick={ () => this.catchPokemon()}><div className="title-catch">Catch</div></button>;
+        btnCatch = <button  onClick={ () => this.catchPokemon()}><div className="title-catch">Catch</div></button>;
+        input = <form className="forEdit">
+                        <input
+                          type="text"
+                          placeholder="Pokemon Name"
+                          value={this.state.value}
+                        disabled/>
+                  </form>;
+    }else{
+        btnAddToMyList = <button  onClick={ () => this.addToMyList()}>Add To My List</button>;
+        btnLetItGo = <NavLink
+                            to={{
+                              pathname: "/",
+                            }}>
+                            <div>
+                              <button  onClick={ () => this.backData(1)}>Let It Go</button>
+                            </div>
+                         </NavLink>;
+        if(isEditable == null){
+          input = <form className="forEdit">
+                          <input
+                            type="text"
+                            placeholder="Pokemon Name"
+                            value={this.state.value}
+                          disabled/>
+                          <button onClick={ () => this.editable()}>Edit</button>
+                        </form>;
+        }else{
+          input = <form className="forEdit" onChange={this.handleChange}>
+                        <input
+                          className="isEditable"
+                          type="text"
+                          placeholder="Pokemon Name"
+                          value={this.state.value}
+                        />
+                        <button onClick={ () => this.editable()}>Update</button>
+                      </form>;
+        }
     }
 
     if(getLocalData.isMyList === 1){
-      info = "My Pokemon List";
-      var btnRelease = <div><button  onClick={ () => this.deleteData(0,getLocalData.myListId,getLocalData.nickname)}><div className="title-release">Release</div></button></div>;
+      btnCatch = null;
+      btnLetItGo= null;
+      btnAddToMyList=null;
+      btnRelease = <div><button  onClick={ () => this.deleteData(0,getLocalData.myListId,getLocalData.nickname)}><div className="title-release">Release</div></button></div>;
+      if(isEditable == null){
+        input = <form className="forEdit">
+                        <input
+                          type="text"
+                          placeholder="Pokemon Name"
+                          value={this.state.value}
+                        disabled/>
+                        <button onClick={ () => this.editable()}>Edit</button>
+                      </form>;
+      }else{
+        input = <form className="forEdit" onChange={this.handleChange} >
+                      <input
+                        className="isEditable"
+                        type="text"
+                        placeholder="Pokemon Name"
+                        value={this.state.value}
+                      />
+                      <button onClick={this.handleSubmit}>Update</button>
+                    </form>;
+      }
     }
 
-    if(isEditable == null){
-      if(isGatcha == null){
-        var input = <form className="forEdit">
-                      <input
-                        type="text"
-                        placeholder="Pokemon Name"
-                        value={this.state.value}
-                      disabled/>
-                    </form>;
-      }else{
-        var input = <form className="forEdit">
-                      <input
-                        type="text"
-                        placeholder="Pokemon Name"
-                        value={this.state.value}
-                      disabled/>
-                      <button onClick={ () => this.editable()}>Edit </button>
-                    </form>;
-      }
-      if(getLocalData.isMyList == 1){
-        var input = <form className="forEdit">
-                      <input
-                        type="text"
-                        placeholder="Pokemon Name"
-                        value={this.state.value}
-                      disabled/>
-                      <button onClick={ () => this.editable()}>Edit</button>
-                    </form>;
-      }
-    }else{
-        var input = <form className="forEdit" onSubmit={this.handleSubmit}>
-                      <input
-                        type="text"
-                        placeholder="Pokemon Name"
-                        value={this.state.value}
-                        onChange={this.handleChange}
-                      />
-                      <button onClick={ () => this.editable()}>Edit</button>
-                    </form>;
-    }
 
     if(error){ return( <div className="panel-loading"><div className="loading">Error : {error.message}</div></div>) }
 

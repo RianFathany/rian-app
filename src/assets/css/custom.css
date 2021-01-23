@@ -74,6 +74,7 @@ a{text-decoration: none;}
 }
 
 .box-load-more button{
+  background: white;
   outline: none;
   padding: 10px 20px;
     border: none;
@@ -132,17 +133,25 @@ a{text-decoration: none;}
 }
 
 input{
-    margin-left: -10px;
-    padding: 10px;
-    font-size: 20px;
-    background: transparent;
-    border-radius: 10px;
-    border: solid 1px grey;
-    outline: none;
-    cursor: pointer;
-    text-align: center;
-    width: 100%;
+  padding: 10px 0px;
+  background: transparent;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+  font-family: 'quicksand-regular';
 }
+.isEditable{
+    background: #ffffffcf;
+    box-shadow: 0px 0px 30px -10px #fff624;
+    border: solid 1px #acacac;
+    cursor: auto;
+}
+
 .image-detail{
   text-align: center;
 }
@@ -222,6 +231,7 @@ input{
 }
 .btn-catch button{
   background-image: url("img/poke-pokeball.png");
+  background-color: white;
   background-repeat: no-repeat;
     background-size: contain;
     height: 150px;
@@ -235,6 +245,7 @@ input{
     margin: 0;
     position: fixed;
     bottom: 0;
+    z-index: 10;
     left: 50%;
     transform: translate(-50%);
     outline: none;
@@ -260,6 +271,7 @@ input{
 }
 .btn-release button{
   background-image: url("img/poke-pokeball-release.png");
+  background-color: white;
   background-repeat: no-repeat;
     background-size: contain;
     height: 150px;
@@ -479,6 +491,7 @@ input{
   padding: 10px;
 }
 .panel-add button{
+  background: white;
   padding: 15px;
     border: none;
     border-radius: 5px;
@@ -498,15 +511,17 @@ input{
   position: relative;
 }
 .forEdit button{
-  padding: 14px;
-    position: absolute;
-    top: 1px;
-    right: -10px;
-    border: none;
-    border-radius: 0px 10px 10px 0px;
-    background: #0000000d;
-    cursor: pointer;
-    outline: none;
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+  margin-top: 10px;
+  background: white;
+  box-shadow: 0px 6px 10px -10px;
+  font-family: 'advent';
+  font-size: 18px;
 }
 .panel-loading{
     padding: 50px;
